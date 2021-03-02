@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/log_in_screen.dart';
-import 'package:flutter_app/sign_up_screen.dart';
+
+// custom created screens
+import '../../login/log_in_screen.dart';
+import 'package:flutter_app/models/only_images.dart';
+import 'package:flutter_app/models/pets_images_list.dart';
+
+// custom created widgets
+import 'package:flutter_app/widgets/carousel_component.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key key, this.title}) : super(key: key);
@@ -12,13 +18,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-  List petsImagesList = [
-    ["https://blogs.cdc.gov/publichealthmatters/files/2020/05/golden_retiver_cat_cropped.jpg", "Pet Doctor"],
-    ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKATssg0avS6zpVktRlLbXVmyQv0cdBMhgrg&usqp=CAU", "Pet Trainer"],
-    ["https://blogs.cdc.gov/publichealthmatters/files/2020/05/golden_retiver_cat_cropped.jpg", "Pet Hostel"],
-    ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKATssg0avS6zpVktRlLbXVmyQv0cdBMhgrg&usqp=CAU", "Pet Groomers"],
-  ];
 
   @override
   void initState() {
@@ -50,26 +49,7 @@ class _MainScreenState extends State<MainScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                child: Card(
-                  child: ClipRRect(
-                    child: Image.network(
-                      petsImagesList[0][0],
-                      fit: BoxFit.cover,
-                      loadingBuilder: (BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null ?
-                            loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
-                                : null,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
+              CarouselComponent(images: onlyImages),
               Container(
                 height: 500,
                 child: GridView.builder(

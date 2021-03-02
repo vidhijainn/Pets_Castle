@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/sign_up_screen.dart';
+
+import 'sign_up_screen.dart';
 
 class LogInScreen extends StatefulWidget {
   LogInScreen({Key key, this.title}) : super(key: key);
